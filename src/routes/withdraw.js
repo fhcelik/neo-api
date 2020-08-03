@@ -2,8 +2,7 @@
 
 const R = require('ramda');
 const router = require('express').Router();
-const {  verifyCustomer } = require('../../facade/authentication');
-const {  getAccounts } = require('../../facade/accounts');
+const {  withdrawMoney } = require('../facade/accounts');
 
 /**
  * @swagger
@@ -25,11 +24,11 @@ const {  getAccounts } = require('../../facade/accounts');
  */
 router.put('/', async (req, res, next) => {
     try {
-        const custId = R.path(['headers', 'x-user'], req);
+        const { accId, amount, currency } = req.body;
         
-        if(await verifyCustomer(custId))    
-            res.sendStatus(204);
-        res.sendStatus(401);
+        await withdrawMoney(accId, Number(amount), currency);
+        
+        res.sendStatus(204);
     }
     catch(error){
         return next(error)

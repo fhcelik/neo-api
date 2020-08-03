@@ -4,9 +4,11 @@ const router = require('express').Router();
 const { version: apiVersion } = require('../../package');
 const authentication = require('./middleware/authentication');
 const errorHandler = require('./middleware/errorHandler');
-const beers = require('./beers');
+const accounts = require('./account');
+const deposit = require('./deposit');
+const withdraw = require('./withdraw');
+const transfer = require('./transfer');
 const docsRouter = require('./docs');
-const rating = require('./rating');
 
 router.get('/', (req, res, next) => {
   res.send(`API v${apiVersion}`);
@@ -14,8 +16,10 @@ router.get('/', (req, res, next) => {
 
 router.use('/docs', docsRouter);
 router.use('/login',authentication);
-router.use('/beers', beers);
-router.use('/rating', rating);
+router.use('/accounts', accounts);
+router.use('/deposit', deposit);
+router.use('/withdraw', withdraw);
+router.use('/transfer', transfer);
 router.use(errorHandler);
 
 module.exports = router;

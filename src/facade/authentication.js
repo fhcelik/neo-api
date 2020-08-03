@@ -1,11 +1,25 @@
 'use strict';
 
-const Datastore = require('nedb');
+const fs = require('fs');
 
-const db = new Datastore({
-    fileName: './user.db',
-    autoLoad: true
-});
+const customers = fs.readFileSync('src/data/customers.json', 'utf8');
+
+exports.verifyCustomer = (custId) => {
+
+    const customerIds = JSON.parse(customers)
+    
+    const customerId = customerIds.filter(customer =>{ 
+        const { custId:customerId } = customer;
+    
+        return customerId == custId; 
+    })
+  
+    if (customerId.length === 0)
+        {
+            return false;
+        }
+ 
+    return true;
+}
 
 
-exports.addUser = (user) => db.insert({user: user, date: new Date()})

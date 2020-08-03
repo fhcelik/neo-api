@@ -2,8 +2,7 @@
 
 const R = require('ramda');
 const router = require('express').Router();
-const {  verifyCustomer } = require('../../facade/authentication');
-const {  getAccounts } = require('../../facade/accounts');
+const {  getAccounts } = require('../facade/accounts');
 
 /**
  * @swagger
@@ -23,13 +22,14 @@ const {  getAccounts } = require('../../facade/accounts');
  *       500:
  *         $ref: '#/components/responses/Undefined'
  */
-router.put('/', async (req, res, next) => {
+router.get('/:value', async (req, res, next) => {
     try {
-        const custId = R.path(['headers', 'x-user'], req);
+        const custId = R.path(['params', 'value'], req);
+        console.log(req.params)
+        const accounts = await getAccounts(custId)
         
-        if(await verifyCustomer(custId))    
-            res.sendStatus(204);
-        res.sendStatus(401);
+        res.json(accounts)
+        
     }
     catch(error){
         return next(error)
