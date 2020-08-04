@@ -1,10 +1,10 @@
 {
-  "name": "Vintri-api",
+  "name": "dma-api",
   "version": "1.0.0",
   "description": "Node.js API",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon src/index.js --ext js",
+    "start": "nodemon src/index.js",
     "test": "mocha src/**/*spec.js"
   },
   "dependencies": {

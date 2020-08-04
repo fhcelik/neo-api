@@ -13,18 +13,18 @@ chai.should();
 describe('middleware/authentication', () => {
   let app;
   let authentication;
-  let addUser;
+  let verifyCustomer;
 
   beforeEach(() => {
     app = express();
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
 
-    addUser = sinon.stub();
+    verifyCustomer = sinon.stub();
 
     authentication = proxyquire('./authentication',{
       '../../facade/authentication':{
-        addUser
+        addUser: verifyCustomer
       }
     });
 
@@ -35,15 +35,15 @@ describe('middleware/authentication', () => {
 
   describe('PUT /', () => {
     it('should return 204 on setting user successfully', () => {
-      const user = 'johnsmith@gmail.com';
-      addUser.resolves();
+      const user = '777';
+      verifyCustomer.resolves();
 
       return request(app)
         .put('/')
         .send(user)
-        .set('x-user', 'johnsmith@gmail.com')
+        .set('x-user', '777')
         .expect(204)
-        .then(() => addUser.calledOnce.should.be.true)
+        .then(() => verifyCustomer.calledOnce.should.be.true)
     });
 
     it('should return 401 when there is invalid email in header', () => {
@@ -54,17 +54,17 @@ describe('middleware/authentication', () => {
         .send(user)
         .set('x-user', '')
         .expect(401)
-        .then(() => addUser.calledOnce.should.be.false)
+        .then(() => verifyCustomer.calledOnce.should.be.false)
     });
 
     it('should return 500 when no response', () => {
-      addUser.rejects();
+      verifyCustomer.rejects();
 
       return request(app)
         .put('/')
         .set('x-user', 'johnsmith@gmail.com')
         .expect(500)
-        .then(() => addUser.calledOnce.should.be.true)
+        .then(() => verifyCustomer.calledOnce.should.be.true)
     });
   });
 });

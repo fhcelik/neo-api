@@ -34,8 +34,19 @@ const { calculateDeposit,
         describe('depositMoney()', () => {
             it('should add money to account for account ID', () => {
                 depositMoney(2001, 1000, 'MXN');
-                getAccounts(504).should.deep.include({"accountId":2001,"custId":504,"balance":900});
+                expect(getAccounts(504)).to.deep.include({"accountId":1234,"custId":777,"balance":0});
             });
         });
-
+        describe('withdrawMoney()', () => {
+            it('should reduce money to account for account ID', () => {
+                withdrawMoney(2001, 1000, 'MXN');
+                expect(getAccounts(504)).to.deep.include({"accountId":1234,"custId":777,"balance":0});
+            });
+        });
+        describe('transferMoney()', () => {
+            it('should reduce money to account for account ID', () => {
+                transferMoney(2001, 1000, 'MXN');
+                expect(getAccounts(504)).to.deep.include({"accountId":1234,"custId":777,"balance":0});
+            });
+        });
 });

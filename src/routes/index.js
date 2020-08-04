@@ -8,13 +8,11 @@ const accounts = require('./account');
 const deposit = require('./deposit');
 const withdraw = require('./withdraw');
 const transfer = require('./transfer');
-const docsRouter = require('./docs');
 
 router.get('/', (req, res, next) => {
   res.send(`API v${apiVersion}`);
 });
 
-router.use('/docs', docsRouter);
 router.use('/login',authentication);
 router.use('/accounts', accounts);
 router.use('/deposit', deposit);

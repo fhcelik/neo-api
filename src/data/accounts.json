@@ -1,1 +1,9 @@
-[{"accountId":"1234","custId":"777","balance":0},{"accountId":"2001","custId":"504","balance":1000},{"accountId":"1010","custId":"2","balance":3600},{"accountId":"5500","custId":"2","balance":1000},{"accountId":"123","custId":"123","balance":-1000},{"accountId":"456","custId":"456","balance":900},{"custId":"219"}]
+[
+    {"accountId":"1234","custId":"777","balance":100},
+    {"accountId":"2001","custId":"504","balance":35000},
+    {"accountId":"1010","custId":"2","balance":7425},
+    {"accountId":"5500","custId":"2","balance":150},
+    {"accountId":"123","custId":"123","balance":15000},
+    {"accountId":"456","custId":"456","balance":65000},
+    {"custId":"219"}
+]
