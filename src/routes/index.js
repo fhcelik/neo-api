@@ -1,23 +1,20 @@
 'use strict';
 
-const router = require('express').Router();
-const { version: apiVersion } = require('../../package');
-const authentication = require('./middleware/authentication');
-const errorHandler = require('./middleware/errorHandler');
-const accounts = require('./account');
-const deposit = require('./deposit');
-const withdraw = require('./withdraw');
-const transfer = require('./transfer');
+const express = require('express');
+const router = express.Router();
+const { createCharacter,  getAllCharacters, getCharacterDetails } = require('../controllers/characterController');
+const {startBattle} = require('../controllers/battleController')
+const {getJobs} = require('../controllers/jobsController')
 
-router.get('/', (req, res, next) => {
-  res.send(`API v${apiVersion}`);
-});
-
-router.use('/login',authentication);
-router.use('/accounts', accounts);
-router.use('/deposit', deposit);
-router.use('/withdraw', withdraw);
-router.use('/transfer', transfer);
-router.use(errorHandler);
+// Route for creating a character
+router.post('/characters', createCharacter);
+// Route for listing all jobs
+router.get('/jobs', getJobs);
+// Route for listing all characters
+router.get('/all-characters', getAllCharacters);
+// Route for getting details of a specific character
+router.get('/characters/:name/details', getCharacterDetails);
+// Route for starting the battle
+router.post('/battle', startBattle);
 
 module.exports = router;

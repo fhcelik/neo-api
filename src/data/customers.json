@@ -1,8 +1,0 @@
-[ 
-    { "custId": 777, "name":"Stewie Griffin"}, 
-    { "custId": 504, "name":"Glen Quagmire"}, 
-    { "custId":2, "name":"Joe Swason"}, 
-    { "custId": 123, "name":"Peter Griffin"}, 
-    { "custId":456, "name":"Lois Griffin"}, 
-    { "custId":219, "name":"John Shark"}
-]

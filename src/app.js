@@ -6,7 +6,6 @@ const cors = require('cors');
 const express = require('express');
 const env = require('./env');
 const Routes = require('./routes');
-const Datastore = require('nedb');
 const app = express();
 
 app

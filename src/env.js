@@ -1,14 +1,13 @@
 'use strict';
 
-const envalid = require('envalid');
+const env = require('dotenv').config()
 
-const { host, port, url } = envalid;
+const { APP_HOST, APP_PORT, APP_WEB_HOST_URL } = env.parsed;
 
-module.exports = envalid.cleanEnv(
-  process.env,
+module.exports = 
   {
-    APP_PORT: port({ default: 5000 }),
-    APP_HOST: host({ default: 'localhost' }),
-    APP_WEB_HOST_URL: url({ devDefault: 'http://localhost:3000' }),
+    APP_PORT,
+    APP_HOST,
+    APP_WEB_HOST_URL
   }
-);
+;
